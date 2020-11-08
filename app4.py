@@ -1,4 +1,3 @@
-#4. SQL Alchemy
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
@@ -9,7 +8,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 
 db = SQLAlchemy(app)
 
-#TO tell this file about routes
 from routes import *
 
 #Now we check if the app.py is exucuted from command line

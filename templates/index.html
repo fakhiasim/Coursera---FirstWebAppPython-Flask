@@ -2,5 +2,12 @@
 
 
 {% block main %}
-<p>Some content of Index page3.</p>
+<p>List of tasks.</p>
+{% if tasks %}
+<ul>
+    {% for task in tasks %}
+        <li>{{ task.tile }} created.</li>
+    {% endfor %}
+</ul>
+{% endif %}
 {% endblock %}

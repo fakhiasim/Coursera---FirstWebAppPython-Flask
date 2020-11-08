@@ -1,27 +1,29 @@
 #Here this file is not aware about app
 #lets imprt it from app3
 
-from app3 import app
-from flask import render_template
-
+from app4 import app,db
+from flask import render_template, redirect, url_for
+from models import Task
+from datetime import datetime
 import forms
+
 
 @app.route('/')#this is a decorator tells python to return below funtion
 @app.route('/index') #define multiple routes to same function
 def index():
+    tasks = Task.query.all()
     return render_template('index.html',page_title = "Home")
 
-#In addition to text we can also return html tags.
-#Infact you can retun complete html pages
-#to do so we need to import render_template and use it to return html file
-#Another cool thing about templates is that you can pass arguments to funtion
-#and use it inside the html file using {{ argument }}
 
-@app.route('/about', methods=['GET','POST'])
-def about():
+@app.route('/add', methods=['GET','POST'])
+def add():
     form = forms.AddTaskForm()
     if form.validate_on_submit():
-        #print ('Submitted title : ', form.title.data)
-        return render_template('about.html',submit_message = form.title.data, form=form)
-    return  render_template('about.html',page_title = "About", form=form)
+        #print ('Submitted title : ', form.title.data)``
+        t = Task(title=form.title.data, date=datetime.utcnow())
+         
+        db.session.add(t)
+        db.session.commit()
+        return redirect(url_for('index'))
+    return  render_template('add.html',page_title = "About", form=form)
 #Here we defined another page about but it is going to contain same so we create base template for it.and reuse it.
