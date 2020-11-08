@@ -3,4 +3,11 @@
 
 {% block main %}
 <p>Some content of About page.</p>
+
+<form action="/about" method="post">
+    {{ form.csrf_token() }}
+    {{ form.title.label }}
+    {{ form.title }}
+    {{ form.submit }}
+</form>
 {% endblock %}

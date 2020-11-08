@@ -1,3 +1,4 @@
+#4. Extending templates
 from flask import Flask,render_template
 
 #When we run a script there is special variable __name__ assigned a value __main__
