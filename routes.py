@@ -17,8 +17,11 @@ def index():
 #Another cool thing about templates is that you can pass arguments to funtion
 #and use it inside the html file using {{ argument }}
 
-@app.route('/about')
+@app.route('/about', methods=['GET','POST'])
 def about():
     form = forms.AddTaskForm()
+    if form.validate_on_submit():
+        #print ('Submitted title : ', form.title.data)
+        return render_template('about.html',submit_message = form.title.data, form=form)
     return  render_template('about.html',page_title = "About", form=form)
 #Here we defined another page about but it is going to contain same so we create base template for it.and reuse it.

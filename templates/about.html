@@ -10,4 +10,10 @@
     {{ form.title }}
     {{ form.submit }}
 </form>
+
+{% if submit_message %}
+
+<h3>{{ submit_message }}</h3>
+{% endif %}
+
 {% endblock %}
